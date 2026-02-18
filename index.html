@@ -1,10 +1,346 @@
 <!DOCTYPE html>
-<html>
+<html lang="et">
 <head>
-  <title>Sukram</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>sukram.page</title>
+  <meta name="description" content="Sukram — lihtne, kiire ja modernne leht." />
+
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 15% 15%, rgba(99,102,241,0.35), transparent 55%),
+                  radial-gradient(1000px 700px at 80% 30%, rgba(34,197,94,0.25), transparent 55%),
+                  radial-gradient(900px 700px at 50% 85%, rgba(236,72,153,0.20), transparent 55%),
+                  var(--bg);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .dot {
+      width: 12px; height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(99,102,241,1), rgba(34,197,94,1));
+      box-shadow: 0 0 0 6px rgba(99,102,241,0.18);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .pill b { color: var(--text); font-weight: 600; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .btn.primary {
+      border: none;
+      background: linear-gradient(135deg, rgba(99,102,241,1), rgba(34,197,94,1));
+      color: #071015;
+    }
+    .btn.primary:hover { filter: brightness(1.05); }
+
+    /* Hero */
+    .hero {
+      margin-top: 18px;
+      padding: 34px 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(600px 240px at 20% 10%, rgba(99,102,241,0.35), transparent 60%),
+                  radial-gradient(520px 220px at 80% 0%, rgba(34,197,94,0.28), transparent 60%);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+
+    .badges {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .list {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      flex: 0 0 auto;
+    }
+
+    .item b { display: block; font-size: 14px; margin-bottom: 2px; }
+    .item span { color: var(--muted2); font-size: 13px; line-height: 1.35; }
+
+    /* Footer */
+    footer {
+      margin-top: 18px;
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 6px;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.25);
+    }
+    footer a:hover { color: white; border-bottom-color: rgba(255,255,255,0.45); }
+
+    /* Tiny animation */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero { animation: pop 420ms ease-out both; }
+      @keyframes pop {
+        from { transform: translateY(6px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Tere tulemast!</h1>
-  <p>sukram.page töötab 🎉</p>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>sukram.page</div>
+      </div>
+
+      <div class="actions">
+        <span class="pill">Status: <b>Live</b> ✅</span>
+        <!-- Pane siia oma päris email kui tahad -->
+        <a class="btn" href="mailto:info@sukram.page">✉️ Kirjuta</a>
+        <a class="btn primary" href="#kontakt">Alusta</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="grid">
+        <div>
+          <h1>Tere tulemast 👋<br/>Sukram lehele</h1>
+          <p class="subtitle">
+            See on lihtne ja modernne GitHub Pages leht, seotud domeeniga <b>sukram.page</b>.
+            Siia saad hiljem lisada oma portfoolio, projekti kirjelduse, lingid ja kontaktid.
+          </p>
+
+          <div class="badges">
+            <span class="badge">⚡ GitHub Pages</span>
+            <span class="badge">🔒 HTTPS (TLS)</span>
+            <span class="badge">🌍 Custom domain</span>
+            <span class="badge">📧 Zoho Mail valmis</span>
+          </div>
+        </div>
+
+        <aside class="card" id="kontakt">
+          <h2>Kiired lingid</h2>
+          <p>Muuda need endale sobivaks.</p>
+
+          <div class="list">
+            <div class="item">
+              <div class="icon">🧑‍💻</div>
+              <div>
+                <b>GitHub</b>
+                <span><a href="https://github.com/markusuljv" target="_blank" rel="noreferrer">github.com/markusuljv</a></span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">📄</div>
+              <div>
+                <b>Projekt</b>
+                <span>Kirjelda siin, mida sa ehitad (1–2 lauset).</span>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="icon">✉️</div>
+              <div>
+                <b>Kontakt</b>
+                <span><a href="mailto:info@sukram.page">info@sukram.page</a></span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> sukram.page</div>
+      <div>
+        Hostitud GitHub Pages’is ·
+        <a href="https://pages.github.com/" target="_blank" rel="noreferrer">docs</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
