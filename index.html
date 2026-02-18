@@ -4,215 +4,444 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>sukram.page</title>
+  <meta name="description" content="Sukram — modernne landing page." />
+
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #050509;
-      overflow: hidden;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    :root{
+      --bg0:#070814;
+      --card: rgba(255,255,255,0.07);
+      --card2: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.14);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --r: 18px;
     }
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-    }
-    /* väike “pehme kuma” */
-    .vignette {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
       background:
-        radial-gradient(900px 600px at 50% 40%, rgba(255, 60, 180, 0.10), transparent 65%),
-        radial-gradient(1200px 900px at 50% 55%, rgba(255, 60, 180, 0.06), transparent 70%),
-        radial-gradient(1200px 900px at 50% 50%, rgba(0,0,0,0.0), rgba(0,0,0,0.55));
-      mix-blend-mode: screen;
+        radial-gradient(1100px 700px at 18% 10%, rgba(99,102,241,0.35), transparent 60%),
+        radial-gradient(1000px 650px at 85% 25%, rgba(34,197,94,0.22), transparent 60%),
+        radial-gradient(900px 650px at 55% 90%, rgba(236,72,153,0.18), transparent 60%),
+        var(--bg0);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{
+      width:min(1120px, calc(100% - 40px));
+      margin:0 auto;
+      padding: 28px 0 60px;
+    }
+
+    /* Top nav */
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius:14px;
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:0.2px;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .logo{
+      width:12px; height:12px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(99,102,241,1), rgba(34,197,94,1));
+      box-shadow: 0 0 0 6px rgba(99,102,241,0.18);
+    }
+    .links{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:650;
+      font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, rgba(99,102,241,1), rgba(34,197,94,1));
+      color:#071015;
+    }
+    .btn.primary:hover{ filter:brightness(1.05); }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      padding: 34px 22px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(650px 280px at 18% 15%, rgba(99,102,241,0.33), transparent 60%),
+        radial-gradient(650px 280px at 82% 10%, rgba(34,197,94,0.22), transparent 60%),
+        radial-gradient(700px 360px at 55% 95%, rgba(236,72,153,0.16), transparent 60%);
+      pointer-events:none;
+      opacity: 0.95;
+    }
+
+    .grid{
+      position: relative;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+
+    h1{
+      margin:0;
+      font-size: clamp(34px, 4.3vw, 58px);
+      letter-spacing: -0.02em;
+      line-height: 1.03;
+    }
+    .sub{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 64ch;
+    }
+    .badges{ margin-top: 16px; display:flex; flex-wrap:wrap; gap:10px; }
+    .badge{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(12px);
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .card p{ margin:0; color: var(--muted); font-size:14px; line-height:1.6; }
+
+    .mini{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .row{
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .ic{
+      width: 34px; height:34px; border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,0.08);
+      flex: 0 0 auto;
+    }
+    .row b{ display:block; font-size:14px; margin-bottom:2px; }
+    .row span{ color: var(--muted2); font-size:13px; line-height:1.35; }
+    .row a{
+      color: rgba(255,255,255,0.86);
+      border-bottom: 1px dashed rgba(255,255,255,0.25);
+    }
+    .row a:hover{ border-bottom-color: rgba(255,255,255,0.5); }
+
+    /* Sections */
+    .sections{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 900px){ .sections{ grid-template-columns:1fr; } }
+
+    .section{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--r);
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.26);
+      backdrop-filter: blur(12px);
+    }
+    .section h3{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .section .txt{
+      color: var(--muted);
+      line-height: 1.65;
+      margin:0 0 12px;
+      font-size: 14px;
+    }
+    .projects{
+      display:grid;
+      gap: 10px;
+    }
+    .proj{
+      border:1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 12px;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+    .proj strong{ display:block; font-size: 14px; }
+    .proj small{ color: var(--muted2); display:block; margin-top:4px; }
+    .tag{
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      border:1px solid rgba(255,255,255,0.14);
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      white-space: nowrap;
+    }
+
+    footer{
+      margin-top: 18px;
+      padding: 0 6px;
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Motion */
+    @media (prefers-reduced-motion: no-preference){
+      .hero{ animation: pop .45s ease-out both; }
+      .section{ animation: pop2 .55s ease-out both; }
+      .section:nth-child(2){ animation-delay: .05s; }
+      .section:nth-child(3){ animation-delay: .08s; }
+      .section:nth-child(4){ animation-delay: .10s; }
+
+      @keyframes pop{
+        from{ transform: translateY(8px); opacity:0; }
+        to{ transform: translateY(0); opacity:1; }
+      }
+      @keyframes pop2{
+        from{ transform: translateY(10px); opacity:0; }
+        to{ transform: translateY(0); opacity:1; }
+      }
     }
   </style>
 </head>
+
 <body>
-  <canvas id="c"></canvas>
-  <div class="vignette"></div>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <span class="logo"></span>
+        <span>sukram.page</span>
+      </div>
+
+      <div class="links">
+        <a class="btn" href="#about">About</a>
+        <a class="btn" href="#projects">Projects</a>
+        <a class="btn" href="#contact">Contact</a>
+        <a class="btn primary" href="mailto:info@sukram.page">✉️ Kirjuta</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="grid">
+        <div>
+          <h1>Modernne leht.<br/>Lihtne hallata.</h1>
+          <p class="sub">
+            See on sinu <b>sukram.page</b> landing page. Muuda tekste, lisa projektid ja lingid —
+            kõik töötab GitHub Pages’i peal (tasuta).
+          </p>
+
+          <div class="badges">
+            <span class="badge">⚡ GitHub Pages</span>
+            <span class="badge">🔒 HTTPS</span>
+            <span class="badge">🌍 Custom domain</span>
+            <span class="badge">📧 Zoho Mail</span>
+          </div>
+        </div>
+
+        <aside class="card" id="contact">
+          <h2>Kontakt & lingid</h2>
+          <p>Muuda need endale sobivaks.</p>
+
+          <div class="mini">
+            <div class="row">
+              <div class="ic">🧑‍💻</div>
+              <div>
+                <b>GitHub</b>
+                <span><a href="https://github.com/markusuljv" target="_blank" rel="noreferrer">github.com/markusuljv</a></span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="ic">✉️</div>
+              <div>
+                <b>Email</b>
+                <span><a href="mailto:info@sukram.page">info@sukram.page</a></span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="ic">🔗</div>
+              <div>
+                <b>Link</b>
+                <span>Lisa siia näiteks CV / LinkedIn / Instagram</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section class="section" id="about">
+        <h3>About</h3>
+        <p class="txt">
+          Kirjuta siia lühike kirjeldus (2–4 lauset): kes sa oled, mida teed, mis su fookus on.
+          Näiteks: “Ehitan veebiprojekte, õpin X, tegelen Y-ga.”
+        </p>
+        <div class="projects">
+          <div class="proj">
+            <div>
+              <strong>Fookus</strong>
+              <small>Nt: web dev • automatiseerimine • disain</small>
+            </div>
+            <span class="tag">2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h3>Projects</h3>
+        <p class="txt">Lisa siia 2–4 projekti. Vaheta pealkirjad, kirjeldused ja lingid.</p>
+
+        <div class="projects">
+          <div class="proj">
+            <div>
+              <strong>Projekt #1</strong>
+              <small>Lühikirjeldus + link repo/ demo</small>
+            </div>
+            <span class="tag">HTML</span>
+          </div>
+
+          <div class="proj">
+            <div>
+              <strong>Projekt #2</strong>
+              <small>Lühikirjeldus + link repo/ demo</small>
+            </div>
+            <span class="tag">JS</span>
+          </div>
+
+          <div class="proj">
+            <div>
+              <strong>Projekt #3</strong>
+              <small>Lühikirjeldus + link repo/ demo</small>
+            </div>
+            <span class="tag">API</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Services / What I do</h3>
+        <p class="txt">
+          Kui see on “firma leht”, kirjuta siia teenused: mida pakud, kellele, millise tulemusega.
+        </p>
+        <div class="projects">
+          <div class="proj">
+            <div>
+              <strong>Kiire landing page</strong>
+              <small>1–2 päeva, puhas disain, SEO basic</small>
+            </div>
+            <span class="tag">Start</span>
+          </div>
+          <div class="proj">
+            <div>
+              <strong>Custom veebilahendus</strong>
+              <small>vastavalt vajadusele</small>
+            </div>
+            <span class="tag">Pro</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Call to action</h3>
+        <p class="txt">
+          Pane siia üks selge tegevus: “Kirjuta mulle”, “Küsi pakkumist”, “Vaata mu töid”.
+        </p>
+        <div class="projects">
+          <div class="proj">
+            <div>
+              <strong>Võtame ühendust</strong>
+              <small>info@sukram.page</small>
+            </div>
+            <a class="tag" href="mailto:info@sukram.page">Email →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div>© <span id="y"></span> sukram.page</div>
+      <div>Hostitud GitHub Pages’is</div>
+    </footer>
+  </div>
 
   <script>
-    const canvas = document.getElementById("c");
-    const ctx = canvas.getContext("2d");
-
-    const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    function resize() {
-      canvas.width = Math.floor(innerWidth * DPR);
-      canvas.height = Math.floor(innerHeight * DPR);
-    }
-    addEventListener("resize", resize);
-    resize();
-
-    // --- Heart math (parametric) ---
-    // Classic heart curve:
-    // x = 16 sin^3(t)
-    // y = 13 cos(t) - 5 cos(2t) - 2 cos(3t) - cos(4t)
-    function heartPoint(t) {
-      const x = 16 * Math.pow(Math.sin(t), 3);
-      const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
-      return { x, y };
-    }
-
-    // Generate target points along heart outline
-    function buildTargets(count) {
-      const pts = [];
-      for (let i = 0; i < count; i++) {
-        const t = (i / count) * Math.PI * 2;
-        const p = heartPoint(t);
-
-        // Outline thickness: push points slightly inward/outward randomly
-        const n = (Math.random() * 0.9 - 0.45);
-        const nx = p.x * (1 + n * 0.03);
-        const ny = p.y * (1 + n * 0.03);
-
-        pts.push({ x: nx, y: ny, t });
-      }
-      return pts;
-    }
-
-    const targets = buildTargets(420);
-
-    // --- Particles ---
-    const particles = [];
-    const MAX = 900;
-
-    function rand(a,b){ return a + Math.random()*(b-a); }
-
-    function worldToScreen(wx, wy) {
-      // scale heart to screen
-      const w = canvas.width, h = canvas.height;
-      const s = Math.min(w, h) * 0.020; // adjust heart size
-      const cx = w * 0.5;
-      const cy = h * 0.48;
-      return { x: cx + wx * s, y: cy - wy * s };
-    }
-
-    function spawn() {
-      const pick = targets[(Math.random() * targets.length) | 0];
-      const p = heartPoint(pick.t);
-
-      // spawn near its target with some jitter
-      const jitter = 0.8;
-      const wx = p.x + rand(-jitter, jitter);
-      const wy = p.y + rand(-jitter, jitter);
-
-      const { x, y } = worldToScreen(wx, wy);
-
-      // small floating hearts
-      particles.push({
-        x: x + rand(-10, 10) * DPR,
-        y: y + rand(-10, 10) * DPR,
-        tx: x,
-        ty: y,
-        vx: rand(-0.35, 0.35) * DPR,
-        vy: rand(-0.35, 0.35) * DPR,
-        a: rand(0.55, 1.0),
-        size: rand(6, 14) * DPR,
-        rot: rand(-0.6, 0.6),
-        vr: rand(-0.02, 0.02),
-        life: rand(120, 260),
-        hue: rand(320, 345),     // pink range
-        sat: rand(70, 95),
-        lum: rand(55, 70),
-      });
-      if (particles.length > MAX) particles.splice(0, particles.length - MAX);
-    }
-
-    // Draw a tiny heart icon
-    function drawMiniHeart(x, y, s, rot, color, glow) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rot);
-
-      ctx.shadowColor = glow;
-      ctx.shadowBlur = 16 * DPR;
-
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      // simple heart path (normalized)
-      ctx.moveTo(0, -0.35*s);
-      ctx.bezierCurveTo(0.55*s, -0.95*s, 1.35*s, -0.15*s, 0, 0.95*s);
-      ctx.bezierCurveTo(-1.35*s, -0.15*s, -0.55*s, -0.95*s, 0, -0.35*s);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.restore();
-    }
-
-    let tick = 0;
-
-    function step() {
-      tick++;
-
-      // background fade for trailing glow
-      ctx.fillStyle = "rgba(5, 5, 9, 0.24)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // keep spawning
-      for (let i = 0; i < 10; i++) spawn();
-
-      // subtle “pulse” for heart movement
-      const pulse = 1 + Math.sin(tick * 0.04) * 0.015;
-
-      // update & draw particles
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-
-        // pull toward target
-        const dx = (p.tx - p.x);
-        const dy = (p.ty - p.y);
-
-        p.vx += dx * 0.0009;
-        p.vy += dy * 0.0009;
-
-        // slight upward drift + noise
-        p.vy += (-0.010 * DPR);
-        p.vx += Math.sin((tick + i) * 0.02) * 0.003 * DPR;
-
-        p.x += p.vx * pulse;
-        p.y += p.vy * pulse;
-
-        p.rot += p.vr;
-
-        // fade out
-        p.life -= 1;
-        p.a *= 0.995;
-
-        const alpha = Math.max(0, Math.min(1, p.a));
-        const color = `hsla(${p.hue}, ${p.sat}%, ${p.lum}%, ${alpha})`;
-        const glow = `hsla(${p.hue}, 100%, 65%, ${alpha})`;
-
-        // sparkle: occasional bright pop
-        let size = p.size;
-        if (Math.random() < 0.015) size *= 1.35;
-
-        drawMiniHeart(p.x, p.y, size, p.rot, color, glow);
-
-        // remove dead
-        if (p.life <= 0 || alpha < 0.02) particles.splice(i, 1);
-      }
-
-      // extra soft center glow
-      ctx.save();
-      ctx.globalCompositeOperation = "screen";
-      const w = canvas.width, h = canvas.height;
-      const grad = ctx.createRadialGradient(w*0.5, h*0.48, 10*DPR, w*0.5, h*0.48, Math.min(w,h)*0.35);
-      grad.addColorStop(0, "rgba(255, 60, 180, 0.08)");
-      grad.addColorStop(1, "rgba(255, 60, 180, 0.0)");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,w,h);
-      ctx.restore();
-
-      requestAnimationFrame(step);
-    }
-
-    // start with solid background once
-    ctx.fillStyle = "#050509";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    step();
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
