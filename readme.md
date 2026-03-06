@@ -44,5 +44,4 @@ Serveripoolne uuendus toimus `deploy.sh` skripti abil, mis teeb `git pull` käsu
 Kuna server asub Hyper-V virtuaalmasinas ja kasutab private IP-aadressi, ei saa GitHub Actions praeguses lahenduses otse serverisse ühenduda. Seetõttu kasutatakse self-hosted variandi puhul `git pull` põhist deploy loogikat, kus server tõmbab ise GitHubist uue koodi.
 
 
-
 Workflow deploy test- tegin readme faili brauseris lahti (http://172.26.156.127/readme.md), muutus oli seal faili lõpus olemas, kui testisin, et GitHub muudatused jõuaks Linuxi veebiserverisse.
