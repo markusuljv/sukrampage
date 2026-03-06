@@ -1,0 +1,21 @@
+name: Deploy Pipeline
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show deploy message
+        run: |
+          echo "PR merge'iti main harusse."
+          echo "Server kasutab self-hosted git pull deploy loogikat."
+          echo "Selles setupis tuleb serveris käivitada ~/deploy.sh"
