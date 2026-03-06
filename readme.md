@@ -33,3 +33,5 @@ Serveris olev deploy script teeb `git pull` käsu ja reloadib Nginx teenuse, et 
 Praegu töötab lokaalses võrgus:
 
 http://172.26.146.76
+
+Workflow deploy test
