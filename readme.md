@@ -32,6 +32,18 @@ Serveris olev deploy script teeb `git pull` käsu ja reloadib Nginx teenuse, et 
 ## Veebileht
 Praegu töötab lokaalses võrgus:
 
-http://172.26.146.76
+http://172.xx.xxx.xx
+http://172.xx.xxx.xxx
 
-Workflow deploy test
+Tegi uue local ip, esimene kord kasutasin ülemist ja teine kord alumist.
+
+## Deploy testimine ja töövoog
+
+Deploy loogika testimiseks loodi eraldi branch, kuhu tehti muudatus. Seejärel commititi ja pushiti muudatus GitHubi, avati Pull Request ning merge'iti see `main` harusse. Pärast merge'i käivitus GitHub Actions workflow, mis kinnitas, et deploy pipeline reageerib õigel sündmusel.
+
+Serveripoolne uuendus toimus `deploy.sh` skripti abil, mis teeb `git pull` käsu ja reloadib Nginx teenuse. Testimise käigus kinnitati, et GitHubi repo on serveriga seotud, `git pull` töötab korrektselt ning muudatused jõuavad pärast deploy käivitamist veebiserverisse.
+
+Kuna server asub Hyper-V virtuaalmasinas ja kasutab private IP-aadressi, ei saa GitHub Actions praeguses lahenduses otse serverisse ühenduda. Seetõttu kasutatakse self-hosted variandi puhul `git pull` põhist deploy loogikat, kus server tõmbab ise GitHubist uue koodi.
+
+
+Workflow deploy test- tegin readme faili brauseris lahti (http://172.xx.xxx.../readme.md), muutus oli seal faili lõpus olemas, kui testisin, et GitHub muudatused jõuaks Linuxi veebiserverisse.
