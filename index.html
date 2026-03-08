@@ -3,23 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Südame leht</title>
-  <meta name="description" content="Animatsiooniga südamekujuline leht, mille keskele saab lisada teksti." />
+  <title>Südame leht roosidega</title>
+  <meta name="description" content="Tumeda taustaga romantiline südameleht detailsemate rooside ja südamekujuliselt hõljuvate osakestega." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #050509;
+      --bg: #040409;
       --text: #fff7fb;
-      --muted: rgba(255, 247, 251, 0.82);
-      --accent: #ff4fa3;
-      --accent-soft: rgba(255, 79, 163, 0.16);
-      --max-text-width: min(58vw, 560px);
+      --muted: rgba(255, 247, 251, 0.9);
+      --max-text-width: min(41vw, 390px);
     }
 
     * { box-sizing: border-box; }
+
     html, body {
       margin: 0;
       min-height: 100%;
-      background: var(--bg);
+      background:
+        radial-gradient(900px 620px at 50% 46%, rgba(92, 10, 48, 0.18), transparent 40%),
+        radial-gradient(1100px 760px at 50% 54%, rgba(38, 0, 22, 0.22), transparent 56%),
+        var(--bg);
       color: var(--text);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow: hidden;
@@ -29,6 +34,7 @@
       position: relative;
       display: grid;
       place-items: center;
+      min-height: 100dvh;
     }
 
     canvas {
@@ -46,79 +52,48 @@
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: clamp(18px, 4vw, 36px);
+      padding: clamp(16px, 4vw, 30px);
       pointer-events: none;
     }
 
     .content {
-      width: min(var(--max-text-width), 88vw);
+      width: min(var(--max-text-width), 78vw);
       text-align: center;
-      pointer-events: auto;
-      padding: clamp(16px, 3vw, 28px);
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.28);
-      border: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(70px);
+    }
+
+    .small {
+      margin: 0 0 12px;
+      font-size: clamp(12px, 1.6vw, 14px);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(255, 247, 251, 0.74);
+      text-shadow: 0 0 10px rgba(255, 79, 163, 0.16);
     }
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(28px, 5vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
       text-wrap: balance;
+      font-weight: 800;
+      text-shadow:
+        0 0 18px rgba(255, 79, 163, 0.12),
+        0 2px 18px rgba(0, 0, 0, 0.55);
     }
 
     p {
       margin: 0 auto;
-      max-width: 34ch;
-      font-size: clamp(14px, 2.2vw, 19px);
+      max-width: 26ch;
+      font-size: clamp(15px, 2vw, 18px);
       line-height: 1.65;
       color: var(--muted);
       text-wrap: pretty;
-    }
-
-    .small {
-      margin-top: 14px;
-      font-size: clamp(12px, 1.8vw, 14px);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 247, 251, 0.66);
-    }
-
-    .actions {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      appearance: none;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      text-decoration: none;
-      padding: 11px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.24);
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, rgba(255,79,163,1), rgba(255,113,189,1));
-      border-color: transparent;
-      color: #14040d;
+      text-shadow:
+        0 0 12px rgba(255, 79, 163, 0.08),
+        0 2px 18px rgba(0, 0, 0, 0.6);
     }
 
     .vignette {
@@ -127,25 +102,23 @@
       z-index: 1;
       pointer-events: none;
       background:
-        radial-gradient(900px 520px at 50% 45%, rgba(255,79,163,0.10), transparent 60%),
-        radial-gradient(1200px 800px at 50% 55%, rgba(0,0,0,0), rgba(0,0,0,0.58));
+        radial-gradient(900px 560px at 50% 46%, rgba(255,79,163,0.11), transparent 62%),
+        radial-gradient(1200px 860px at 50% 56%, rgba(0,0,0,0), rgba(0,0,0,0.58));
       mix-blend-mode: screen;
     }
 
-    /* Telefoni jaoks natuke kitsam tekstikast */
     @media (max-width: 640px) {
-      :root {
-        --max-text-width: 82vw;
+      :root { --max-text-width: 72vw; }
+      .content { transform: translateY(54px); }
+      h1 { font-size: clamp(26px, 8vw, 40px); }
+      p {
+        max-width: 23ch;
+        font-size: clamp(14px, 4vw, 17px);
+        line-height: 1.55;
       }
-      .content {
-        border-radius: 20px;
-      }
-      .actions {
-        gap: 10px;
-      }
-      .btn {
-        width: 100%;
-        max-width: 280px;
+      .small {
+        font-size: 11px;
+        letter-spacing: 0.12em;
       }
     }
   </style>
@@ -156,32 +129,43 @@
 
   <main class="overlay">
     <section class="content">
-      <!-- Muuda siit enda tekst -->
-      <div class="small">Sinu tekst südame sees</div>
-      <h1>Kirjuta siia pealkiri</h1>
+      <div class="small">🐤Tipsu🐤</div>
+      <h1>❤️Laura❤️<br /></h1>
       <p>
-        See ala on tehtud nii, et seda oleks telefonis ja arvutis mugav lugeda.
-        Muuda see tekst enda soovitud sõnumiks, kirjelduseks või tervituseks.
+        Kõige ilusamat naistepäeva kõige armsamale, ilusamale ja naiselikumale naisele!
+        Loodan, et sul tuleb see päev sama ilus ja eriline nagu oled sina ise.
+         Kallistan!
+          
       </p>
-
-      <div class="actions">
-        <a class="btn primary" href="#">Esimene nupp</a>
-        <a class="btn" href="#">Teine nupp</a>
-      </div>
     </section>
   </main>
 
   <script>
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
-    const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const DPR = Math.max(1, Math.min(1.8, window.devicePixelRatio || 1));
+
+    const particles = [];
+    const outlineSeeds = [];
+    const roses = [];
+    let heartSafeZone = null;
+    let textSafeZone = null;
+    let bgRoseSprite = null;
+    let bgRoseSprite2 = null;
 
     function resize() {
-      canvas.width = Math.floor(window.innerWidth * DPR);
-      canvas.height = Math.floor(window.innerHeight * DPR);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = Math.floor(width * DPR);
+      canvas.height = Math.floor(height * DPR);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      buildSeeds();
+      buildZones();
+      buildRoses();
+      buildSprites();
     }
     window.addEventListener('resize', resize);
-    resize();
 
     function heartPoint(t) {
       const x = 16 * Math.pow(Math.sin(t), 3);
@@ -189,12 +173,150 @@
       return { x, y };
     }
 
-    function drawMiniHeart(x, y, s, rot, color, glow) {
+    function buildSeeds() {
+      outlineSeeds.length = 0;
+      for (let i = 0; i < 560; i++) {
+        const t = (i / 560) * Math.PI * 2;
+        outlineSeeds.push({ t, wobble: Math.random() * 0.05 - 0.025 });
+      }
+    }
+
+    function buildZones() {
+      const w = canvas.width;
+      const h = canvas.height;
+      const vw = w / DPR;
+      const vh = h / DPR;
+      const smaller = Math.min(vw, vh);
+      const heartScaleBase = Math.min(Math.max(smaller, 700), 1200);
+      const scale = heartScaleBase * 0.024 * DPR;
+
+      heartSafeZone = {
+        cx: w * 0.5,
+        cy: h * 0.495,
+        rx: 16 * scale * 0.98,
+        ry: 15.2 * scale * 0.98
+      };
+
+      const textWidth = Math.min(vw * 0.34, 360) * DPR;
+      const textHeight = 190 * DPR;
+      const textCy = h * 0.5 + 68 * DPR;
+
+      textSafeZone = {
+        left: w * 0.5 - textWidth / 2 - 18 * DPR,
+        top: textCy - textHeight / 2 - 14 * DPR,
+        right: w * 0.5 + textWidth / 2 + 18 * DPR,
+        bottom: textCy + textHeight / 2 + 14 * DPR
+      };
+    }
+
+    function insideHeartZone(x, y, extra = 0) {
+      const nx = (x - heartSafeZone.cx) / (heartSafeZone.rx + extra);
+      const ny = (y - heartSafeZone.cy) / (heartSafeZone.ry + extra);
+      return nx * nx + ny * ny < 1;
+    }
+
+    function insideTextZone(x, y, extra = 0) {
+      return (
+        x > textSafeZone.left - extra &&
+        x < textSafeZone.right + extra &&
+        y > textSafeZone.top - extra &&
+        y < textSafeZone.bottom + extra
+      );
+    }
+
+    function buildSprites() {
+      bgRoseSprite = createRoseSprite(96, {
+        outer: 'rgba(86, 10, 33, 0.94)',
+        mid: 'rgba(114, 18, 44, 0.95)',
+        inner: 'rgba(146, 26, 58, 0.90)',
+        glow: 'rgba(170, 42, 88, 0.26)',
+        center: 'rgba(28, 4, 12, 0.98)',
+        highlight: 'rgba(188, 60, 105, 0.26)'
+      });
+
+      bgRoseSprite2 = createRoseSprite(96, {
+        outer: 'rgba(110, 18, 40, 0.94)',
+        mid: 'rgba(145, 28, 56, 0.95)',
+        inner: 'rgba(178, 38, 74, 0.90)',
+        glow: 'rgba(195, 56, 100, 0.22)',
+        center: 'rgba(35, 5, 14, 0.98)',
+        highlight: 'rgba(205, 84, 122, 0.20)'
+      });
+    }
+
+    function createRoseSprite(size, palette) {
+      const c = document.createElement('canvas');
+      const r = c.getContext('2d');
+      c.width = size;
+      c.height = size;
+
+      r.translate(size / 2, size / 2);
+      r.shadowColor = palette.glow;
+      r.shadowBlur = size * 0.12;
+
+      const outerPetals = 8;
+      for (let i = 0; i < outerPetals; i++) {
+        r.save();
+        r.rotate((Math.PI * 2 * i) / outerPetals + (i % 2) * 0.12);
+        r.fillStyle = palette.outer;
+        r.beginPath();
+        r.ellipse(size * 0.28, 0, size * 0.26, size * 0.15, 0.36, 0, Math.PI * 2);
+        r.fill();
+        r.restore();
+      }
+
+      const midPetals = 6;
+      for (let i = 0; i < midPetals; i++) {
+        r.save();
+        r.rotate((Math.PI * 2 * i) / midPetals + 0.18);
+        r.fillStyle = palette.mid;
+        r.beginPath();
+        r.ellipse(size * 0.19, 0, size * 0.19, size * 0.11, 0.55, 0, Math.PI * 2);
+        r.fill();
+        r.restore();
+      }
+
+      const innerPetals = 4;
+      for (let i = 0; i < innerPetals; i++) {
+        r.save();
+        r.rotate((Math.PI * 2 * i) / innerPetals + 0.36);
+        r.fillStyle = palette.inner;
+        r.beginPath();
+        r.ellipse(size * 0.11, 0, size * 0.115, size * 0.07, 0.72, 0, Math.PI * 2);
+        r.fill();
+        r.restore();
+      }
+
+      r.fillStyle = palette.center;
+      r.beginPath();
+      r.arc(0, 0, size * 0.09, 0, Math.PI * 2);
+      r.fill();
+
+      r.strokeStyle = palette.highlight;
+      r.lineWidth = Math.max(1, size * 0.018);
+      r.beginPath();
+      r.arc(0, 0, size * 0.07, 0.2, Math.PI * 1.9);
+      r.stroke();
+
+      const halo = r.createRadialGradient(0, 0, 0, 0, 0, size * 0.4);
+      halo.addColorStop(0, 'rgba(255,255,255,0)');
+      halo.addColorStop(0.45, 'rgba(255,120,170,0.06)');
+      halo.addColorStop(1, 'rgba(255,255,255,0)');
+      r.fillStyle = halo;
+      r.beginPath();
+      r.arc(0, 0, size * 0.4, 0, Math.PI * 2);
+      r.fill();
+
+      return c;
+    }
+
+    function drawMiniHeart(x, y, s, rot, color, glow, alphaMul = 1) {
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(rot);
       ctx.shadowColor = glow;
-      ctx.shadowBlur = 14 * DPR;
+      ctx.shadowBlur = 12 * DPR;
+      ctx.globalAlpha = alphaMul;
       ctx.fillStyle = color;
 
       ctx.beginPath();
@@ -206,36 +328,107 @@
       ctx.restore();
     }
 
+    function drawRose(rose) {
+      const sprite = rose.variant === 2 ? bgRoseSprite2 : bgRoseSprite;
+      ctx.save();
+      ctx.globalAlpha = rose.alpha;
+      ctx.translate(rose.x, rose.y + rose.bob);
+      ctx.rotate(rose.rot);
+      ctx.drawImage(sprite, -rose.size / 2, -rose.size / 2, rose.size, rose.size);
+      ctx.restore();
+    }
+
+    function buildRoses() {
+      roses.length = 0;
+      const w = canvas.width;
+      const h = canvas.height;
+      const smaller = Math.min(w, h) / DPR;
+
+      const spacing = (smaller < 700 ? 66 : 84) * DPR;
+      const margin = (smaller < 700 ? 18 : 24) * DPR;
+      const minSeparation = (smaller < 700 ? 50 : 64) * DPR;
+
+      const cells = [];
+      for (let y = margin; y < h - margin; y += spacing) {
+        for (let x = margin; x < w - margin; x += spacing) {
+          const jitterX = (Math.random() - 0.5) * spacing * 0.34;
+          const jitterY = (Math.random() - 0.5) * spacing * 0.34;
+          const px = x + jitterX;
+          const py = y + jitterY;
+
+          if (insideHeartZone(px, py, 44 * DPR)) continue;
+          if (insideTextZone(px, py, 18 * DPR)) continue;
+
+          cells.push({ x: px, y: py });
+        }
+      }
+
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = (Math.random() * (i + 1)) | 0;
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+
+      for (const cell of cells) {
+        let tooClose = false;
+        for (const rose of roses) {
+          const dx = rose.baseX - cell.x;
+          const dy = rose.baseY - cell.y;
+          if (dx * dx + dy * dy < minSeparation * minSeparation) {
+            tooClose = true;
+            break;
+          }
+        }
+        if (tooClose) continue;
+
+        const dxCenter = cell.x - heartSafeZone.cx;
+        const dyCenter = cell.y - heartSafeZone.cy;
+        const dist = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+        const preferredRing = Math.min(w, h) * 0.29;
+        const ringBoost = Math.max(0, 1 - Math.abs(dist - preferredRing) / (preferredRing * 1.1));
+        const keepChance = 0.38 + ringBoost * 0.34;
+
+        if (Math.random() > keepChance) continue;
+
+        roses.push({
+          baseX: cell.x,
+          baseY: cell.y,
+          x: cell.x,
+          y: cell.y,
+          size: (smaller < 700 ? 17 : 22) * DPR + Math.random() * 7 * DPR,
+          rot: Math.random() * 1.0 - 0.5,
+          rotSpeed: Math.random() * 0.0032 - 0.0016,
+          bobSeed: Math.random() * Math.PI * 2,
+          driftSeed: Math.random() * Math.PI * 2,
+          depth: 0.82 + Math.random() * 0.45,
+          alpha: 0.76 + Math.random() * 0.16,
+          bob: 0,
+          variant: Math.random() < 0.45 ? 2 : 1
+        });
+      }
+    }
+
     function screenPoint(wx, wy, scale, cx, cy) {
       return { x: cx + wx * scale, y: cy - wy * scale };
     }
-
-    const particles = [];
-    const outlineSeeds = [];
-
-    function rebuildSeeds() {
-      outlineSeeds.length = 0;
-      for (let i = 0; i < 420; i++) {
-        const t = (i / 420) * Math.PI * 2;
-        outlineSeeds.push({ t, wobble: Math.random() * 0.045 - 0.0225 });
-      }
-    }
-    rebuildSeeds();
 
     function spawnParticle() {
       const w = canvas.width;
       const h = canvas.height;
       const smaller = Math.min(w, h) / DPR;
-      const scale = (smaller < 700 ? smaller * 0.018 : smaller * 0.021) * DPR;
+
+      const heartScaleBase = Math.min(Math.max(smaller, 700), 1200);
+      const scale = heartScaleBase * 0.024 * DPR;
       const cx = w * 0.5;
-      const cy = h * (smaller < 700 ? 0.5 : 0.48);
+      const cy = h * 0.495;
 
       const seed = outlineSeeds[(Math.random() * outlineSeeds.length) | 0];
       const p = heartPoint(seed.t);
       const factor = 1 + seed.wobble + (Math.random() * 0.015 - 0.0075);
       const point = screenPoint(p.x * factor, p.y * factor, scale, cx, cy);
 
-      const drift = smaller < 700 ? 7 : 10;
+      const drift = smaller < 700 ? 8 : 11;
+      const useRed = Math.random() < 0.34;
+
       particles.push({
         x: point.x + (Math.random() * drift - drift / 2) * DPR,
         y: point.y + (Math.random() * drift - drift / 2) * DPR,
@@ -243,14 +436,14 @@
         ty: point.y,
         vx: (Math.random() * 0.5 - 0.25) * DPR,
         vy: (Math.random() * 0.5 - 0.25) * DPR,
-        a: 0.5 + Math.random() * 0.5,
-        size: (smaller < 700 ? 5.5 : 7.5) * DPR + Math.random() * 5 * DPR,
+        a: 0.58 + Math.random() * 0.42,
+        size: (smaller < 700 ? 6.4 : 8.2) * DPR + Math.random() * 3.8 * DPR,
         rot: Math.random() * 1.4 - 0.7,
         vr: Math.random() * 0.03 - 0.015,
-        life: 120 + Math.random() * 150,
-        hue: 324 + Math.random() * 18,
-        sat: 82 + Math.random() * 14,
-        lum: 58 + Math.random() * 12
+        life: 120 + Math.random() * 140,
+        hue: useRed ? (350 + Math.random() * 8) : (324 + Math.random() * 16),
+        sat: useRed ? (82 + Math.random() * 12) : (84 + Math.random() * 14),
+        lum: useRed ? (52 + Math.random() * 10) : (60 + Math.random() * 12)
       });
 
       if (particles.length > 900) particles.shift();
@@ -262,12 +455,23 @@
       tick += 1;
       const w = canvas.width;
       const h = canvas.height;
-      ctx.fillStyle = 'rgba(5, 5, 9, 0.24)';
+
+      ctx.fillStyle = 'rgba(4, 4, 9, 0.23)';
       ctx.fillRect(0, 0, w, h);
+
+      for (const rose of roses) {
+        rose.rot += rose.rotSpeed;
+        rose.bob = Math.sin(tick * 0.035 + rose.bobSeed) * 2.6 * rose.depth * DPR;
+        const driftX = Math.cos(tick * 0.018 + rose.driftSeed) * 1.9 * rose.depth * DPR;
+        const driftY = Math.sin(tick * 0.022 + rose.driftSeed) * 1.6 * rose.depth * DPR;
+        rose.x = rose.baseX + driftX;
+        rose.y = rose.baseY + driftY;
+        drawRose(rose);
+      }
 
       for (let i = 0; i < 9; i++) spawnParticle();
 
-      const pulse = 1 + Math.sin(tick * 0.045) * 0.014;
+      const pulse = 1 + Math.sin(tick * 0.045) * 0.015;
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
@@ -287,20 +491,20 @@
 
         const alpha = Math.max(0, Math.min(1, p.a));
         const color = `hsla(${p.hue}, ${p.sat}%, ${p.lum}%, ${alpha})`;
-        const glow = `hsla(${p.hue}, 100%, 68%, ${alpha})`;
-        let size = p.size;
-        if (Math.random() < 0.018) size *= 1.28;
+        const glow = `hsla(${p.hue}, 100%, ${Math.min(72, p.lum + 10)}%, ${alpha})`;
 
-        drawMiniHeart(p.x, p.y, size, p.rot, color, glow);
+        let size = p.size;
+        if (Math.random() < 0.015) size *= 1.25;
+
+        drawMiniHeart(p.x, p.y, size, p.rot, color, glow, 0.98);
 
         if (p.life <= 0 || alpha < 0.02) particles.splice(i, 1);
       }
 
-      // Keskele pehme kuma, aga mitte liiga tugev, et tekst loetav jääks
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
-      const grad = ctx.createRadialGradient(w * 0.5, h * 0.48, 12 * DPR, w * 0.5, h * 0.48, Math.min(w, h) * 0.26);
-      grad.addColorStop(0, 'rgba(255, 79, 163, 0.03)');
+      const grad = ctx.createRadialGradient(w * 0.5, h * 0.5, 12 * DPR, w * 0.5, h * 0.5, Math.min(w, h) * 0.32);
+      grad.addColorStop(0, 'rgba(255, 79, 163, 0.028)');
       grad.addColorStop(1, 'rgba(255, 79, 163, 0.0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
@@ -309,7 +513,8 @@
       requestAnimationFrame(frame);
     }
 
-    ctx.fillStyle = '#050509';
+    resize();
+    ctx.fillStyle = '#040409';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     frame();
   </script>
